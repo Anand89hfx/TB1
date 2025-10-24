@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Tanu 💖</title>
+  <style>
+    :root{
+      --bg:#fff0f6;
+      --card:#fff;
+      --accent:#ff6fa3;
+      --muted:#f7d9e6;
+      --text:#333;
+      --gold:#ffd166;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, #fff0f6 0%, #fffefc 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    header{
+      text-align:center;
+      padding:40px 16px 10px;
+    }
+    .title{
+      font-size:2.2rem;
+      letter-spacing:0.4px;
+      margin:0;
+      color:var(--accent);
+      text-shadow:0 1px 0 rgba(255,255,255,0.6);
+    }
+    .subtitle{ color:#b04b7f; margin-top:6px; font-weight:600 }
+    .hero{
+      max-width:980px;
+      margin:16px auto 32px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:24px;
+      padding:20px;
+    }
+
+    /* left card */
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:22px;
+      box-shadow: 0 6px 24px rgba(180,80,140,0.08);
+      position:relative;
+      overflow:hidden;
+    }
+    .message{
+      font-size:1.05rem;
+      line-height:1.6;
+      color:#463244;
+    }
+    .big-heart{
+      font-size:3rem;
+      color:var(--accent);
+      display:inline-block;
+      transform:translateY(4px);
+    }
+
+    /* playlist */
+    .playlist{ margin-top:18px }
+    .track{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:10px;
+      border-radius:12px;
+      transition:background .18s, transform .12s;
+      cursor:default;
+    }
+    .track:hover{ background:var(--muted); transform:translateY(-4px); }
+    .playbtn{
+      width:48px; height:48px; border-radius:12px;
+      display:grid; place-items:center;
+      background:linear-gradient(180deg,var(--accent),#ff2f7b);
+      color:white; font-weight:700; border:none; cursor:pointer;
+      box-shadow:0 6px 18px rgba(255,111,147,0.22);
+    }
+    .track-info{flex:1}
+    .track-title{font-weight:700}
+    .track-desc{font-size:.88rem; color:#8a6b82}
+
+    /* audio controls area */
+    .controls{
+      display:flex; align-items:center; gap:10px; margin-top:14px;
+      padding-top:12px; border-top:1px dashed #f1d6e7;
+    }
+    .small-btn{ padding:8px 12px; border-radius:10px; border:none; cursor:pointer; background:linear-gradient(180deg,var(--gold),#ffde93) }
+    .time{ font-size:.9rem; color:#6b465a; }
+
+    /* right column - image slideshow */
+    .right{
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .photo{
+      width:100%;
+      height:320px;
+      border-radius:12px;
+      overflow:hidden;
+      position:relative;
+      box-shadow: 0 10px 30px rgba(150,80,120,0.08);
+    }
+    .photo img{ width:100%; height:100%; object-fit:cover; display:block; transition:opacity .7s; }
+
+    .slideshow-dots{
+      display:flex; gap:8px; justify-content:center; margin-top:6px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%; background:rgba(0,0,0,0.12);
+      cursor:pointer;
+    }
+    .dot.active{ background:var(--accent); transform:scale(1.15); }
+
+    /* confetti/hearts */
+    .hearts{ pointer-events:none; position:fixed; inset:0; z-index:20; overflow:hidden }
+    .heart{
+      position:absolute;
+      font-size:20px;
+      opacity:.95;
+      animation: floatUp 6s linear infinite;
+      transform-origin:center;
+    }
+    @keyframes floatUp{
+      0%{ transform: translateY(30vh) rotate(0) scale(.9); opacity:0 }
+      10%{ opacity:1 }
+      100%{ transform: translateY(-40vh) rotate(360deg) scale(1.2); opacity:0 }
+    }
+
+    footer{ text-align:center; padding:28px 8px; color:#8a6b82; font-size:.95rem }
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{ grid-template-columns:1fr; padding:12px }
+      .photo{ height:260px }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <header>
+    <h1 class="title">Happy Birthday, Tanu 💕</h1>
+    <div class="subtitle">You make my world more beautiful every day</div>
+  </header>
+
+  <main class="hero">
+    <section class="card">
+      <div class="message">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="big-heart">💗</div>
+          <div>
+            <div style="font-weight:800;font-size:1.15rem">For my love — Tanu</div>
+            <div style="font-size:.95rem;color:#7a4a63">Happy Birthday! Thank you for your smile, your warmth, and your love.</div>
+          </div>
+        </div>
+
+        <p style="margin-top:14px;">
+          I wrote a few lines for you —<br>
+          <em style="color:#9a5a83">“Every day with you feels like a gentle song — soft, warm and endlessly beautiful.”</em>
+        </p>
+
+        <!-- Playlist -->
+        <div class="playlist" id="playlist">
+          <div class="track" data-src="audio/arz_kiya_hai.mp3">
+            <button class="playbtn" aria-label="Play">▶</button>
+            <div class="track-info">
+              <div class="track-title">Arz Kiya Hai</div>
+              <div class="track-desc">Romantic dedication</div>
+            </div>
+            <div style="width:64px;text-align:right;color:#8a6b82">3:42</div>
+          </div>
+
+          <div class="track" data-src="audio/sundari.mp3">
+            <button class="playbtn" aria-label="Play">▶</button>
+            <div class="track-info">
+              <div class="track-title">Sundari</div>
+              <div class="track-desc">Cute & sweet</div>
+            </div>
+            <div style="width:64px;text-align:right;color:#8a6b82">3:18</div>
+          </div>
+
+          <div class="track" data-src="audio/yeh_dil_tum_bin.mp3">
+            <button class="playbtn" aria-label="Play">▶</button>
+            <div class="track-info">
+              <div class="track-title">Yeh Dil Tum Bin</div>
+              <div class="track-desc">Heartfelt</div>
+            </div>
+            <div style="width:64px;text-align:right;color:#8a6b82">4:01</div>
+          </div>
+
+          <div class="track" data-src="audio/mere_naam_tu.mp3">
+            <button class="playbtn" aria-label="Play">▶</button>
+            <div class="track-info">
+              <div class="track-title">Mere Naam Tu</div>
+              <div class="track-desc">Warm & loving</div>
+            </div>
+            <div style="width:64px;text-align:right;color:#8a6b82">3:35</div>
+          </div>
+
+          <!-- audio element reused for playing tracks -->
+          <div class="controls">
+            <button id="prev" class="small-btn">◀ Prev</button>
+            <button id="toggle" class="small-btn">Play</button>
+            <button id="next" class="small-btn">Next ▶</button>
+            <div style="flex:1"></div>
+            <div class="time" id="time">00:00 / 00:00</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="right">
+      <div class="card photo" id="photoCard" aria-hidden="false">
+        <!-- Images used are from public result hits; swap these URLs with your own images if you prefer -->
+        <img id="slideImg" src="https://pixnio.com/free-images/2017/02/25/2017-02-25-12-48-11-100x100.jpg" alt="Tanu - photo">
+      </div>
+
+      <div class="slideshow-dots" id="dots"></div>
+
+      <div style="display:flex;gap:8px;justify-content:center">
+        <button id="picPrev" class="small-btn">◀</button>
+        <button id="picNext" class="small-btn">▶</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    Made with lots of love ❤️ — Happy Birthday, Tanu!
+  </footer>
+
+  <!-- single audio element used to play whichever track user chooses -->
+  <audio id="player"></audio>
+
+  <script>
+    /* ---------- Playlist logic ---------- */
+    const tracks = Array.from(document.querySelectorAll('.track'));
+    const player = document.getElementById('player');
+    const toggle = document.getElementById('toggle');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const timeLabel = document.getElementById('time');
+    let currentIndex = -1;
+    let isPlaying = false;
+
+    // helper - format seconds to mm:ss
+    function fmt(s){
+      if (!s || isNaN(s)) return '00:00';
+      const m = Math.floor(s/60);
+      const sec = Math.floor(s%60).toString().padStart(2,'0');
+      return `${m}:${sec}`;
+    }
+
+    // clicking a track's play button
+    tracks.forEach((t, i)=>{
+      const btn = t.querySelector('.playbtn');
+      btn.addEventListener('click', ()=>{
+        if (currentIndex === i){
+          // toggle play/pause
+          if (player.paused) player.play(); else player.pause();
+        } else {
+          loadTrack(i);
+          player.play();
+        }
+      });
+    });
+
+    // load track by index
+    function loadTrack(i){
+      const t = tracks[i];
+      const src = t.dataset.src;
+      if (!src){ alert('Audio file missing. Put your mp3 in the audio/ folder or update the data-src.'); return; }
+      currentIndex = i;
+      player.src = src;
+      player.load();
+      updateActive();
+    }
+
+    // update UI active state
+    function updateActive(){
+      tracks.forEach((t, idx)=>{
+        t.style.opacity = idx===currentIndex? '1' : '0.95';
+        const btn = t.querySelector('.playbtn');
+        btn.textContent = idx===currentIndex && !player.paused ? '⏸' : '▶';
+      });
+      toggle.textContent = player.paused ? 'Play' : 'Pause';
+    }
+
+    // player events
+    player.addEventListener('play', ()=>{
+      isPlaying = true; updateActive();
+    });
+    player.addEventListener('pause', ()=>{
+      isPlaying = false; updateActive();
+    });
+    player.addEventListener('timeupdate', ()=>{
+      timeLabel.textContent = fmt(player.currentTime) + ' / ' + fmt(player.duration);
+    });
+    player.addEventListener('ended', ()=>{
+      // move to next when ended
+      if (currentIndex < tracks.length - 1){
+        loadTrack(currentIndex + 1);
+        player.play();
+      } else {
+        player.currentTime = 0;
+        player.pause();
+      }
+    });
+
+    toggle.addEventListener('click', ()=>{
+      if (!player.src){
+        loadTrack(0);
+        player.play();
+      } else {
+        if (player.paused) player.play(); else player.pause();
+      }
+    });
+    prevBtn.addEventListener('click', ()=>{
+      if (currentIndex > 0) loadTrack(currentIndex - 1);
+    });
+    nextBtn.addEventListener('click', ()=>{
+      if (currentIndex < tracks.length - 1) loadTrack(currentIndex + 1);
+    });
+
+    // initialize labels
+    updateActive();
+
+    /* ---------- Photo slideshow ---------- */
+    const images = [
+      /images/tanu1.png
+      /images/tanu2.jpg
+      /images/tanu3.png
+      /images/tanu4.webp
+    ];
+    const slideImg = document.getElementById('slideImg');
+    const dotsWrap = document.getElementById('dots');
+    let slideIndex = 0;
+    images.forEach((src, i)=>{
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i===0 ? ' active' : '');
+      dot.addEventListener('click', ()=> { showSlide(i); });
+      dotsWrap.appendChild(dot);
+    });
+
+    function showSlide(i){
+      slideIndex = (i + images.length) % images.length;
+      slideImg.style.opacity = 0;
+      setTimeout(()=> {
+        slideImg.src = images[slideIndex];
+        slideImg.alt = "Tanu - photo " + (slideIndex+1);
+        slideImg.style.opacity = 1;
+      }, 260);
+      Array.from(dotsWrap.children).forEach((d, idx)=> d.classList.toggle('active', idx===slideIndex));
+    }
+
+    document.getElementById('picPrev').addEventListener('click', ()=> showSlide(slideIndex - 1));
+    document.getElementById('picNext').addEventListener('click', ()=> showSlide(slideIndex + 1));
+    // automatic slide every 6s
+    setInterval(()=> showSlide(slideIndex + 1), 6000);
+
+    showSlide(0);
+
+    /* ---------- Floating hearts confetti ---------- */
+    const heartsContainer = document.getElementById('hearts');
+    function spawnHeart(){
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      const size = 18 + Math.random()*26;
+      heart.style.fontSize = size + 'px';
+      heart.style.left = (Math.random()*100) + '%';
+      heart.style.top = (60 + Math.random()*30) + '%';
+      heart.style.opacity = (0.6 + Math.random()*0.6);
+      heart.style.transform = `translateY(0) rotate(${Math.random()*360}deg)`;
+      heart.textContent = Math.random() > .4 ? '💗' : '💞';
+      heart.style.animationDuration = (5 + Math.random()*4) + 's';
+      heartsContainer.appendChild(heart);
+      // remove after animation
+      setTimeout(()=> heart.remove(), 9000);
+    }
+    // spawn hearts periodically
+    setInterval(spawnHeart, 700);
+
+    /* ---------- small UX: keyboard shortcuts ---------- */
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === ' '){ e.preventDefault(); toggle.click(); }
+      if (e.key === 'ArrowRight') nextBtn.click();
+      if (e.key === 'ArrowLeft') prevBtn.click();
+    });
+
+    /* ---------- Tip: If audio files are not playing in some browsers when loading local files:
+       - Some browsers restrict autoplay or playing local files. If you encounter issues,
+         load real mp3 files by replacing the data-src values with full URLs or use a simple local webserver:
+         e.g. run: python -m http.server 8000  (then open http://localhost:8000)
+    ---------- */
+  </script>
+</body>
+</html>
